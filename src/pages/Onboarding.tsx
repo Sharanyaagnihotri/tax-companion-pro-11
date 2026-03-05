@@ -111,9 +111,9 @@ const Onboarding = () => {
                   <SelectContent>
                     <SelectItem value="2025-26">AY 2025-26</SelectItem>
                     <SelectItem value="2024-25">AY 2024-25</SelectItem>
-                    <SelectItem value="2023-24">AY 2024-25</SelectItem>
-                    <SelectItem value="2022-23">AY 2024-25</SelectItem>
-                    <SelectItem value="2021-22">AY 2024-25</SelectItem>
+                    <SelectItem value="2023-24">AY 2023-24</SelectItem>
+                    <SelectItem value="2022-23">AY 2022-23</SelectItem>
+                    <SelectItem value="2021-22">AY 2021-22</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
