@@ -14,6 +14,7 @@ interface DocType {
 
 const docTypes: DocType[] = [
   { id: "form16", label: "Form 16", desc: "From your employer", required: true },
+  { id: "Knowledge Base", label:"Knowledge Base", desc: "Knowledge Base", required: true },
   { id: "ais", label: "AIS / 26AS", desc: "Annual Information Statement" },
   { id: "bank", label: "Bank Statements", desc: "Savings & FD interest" },
   { id: "investment", label: "Investment Proofs", desc: "80C, 80D, etc." },

@@ -12,6 +12,18 @@ const Onboarding = () => {
   const [userType, setUserType] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [pan, setPan] = useState("");
+  const [panError, setPanError] = useState("");
+
+  const validatePan = (value: string) => {
+    const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
+    if (value.length === 10 && !panRegex.test(value)) {
+      setPanError("Invalid PAN format (e.g. ABCDE1234F)");
+    } else if (value.length > 0 && value.length < 10) {
+      setPanError("PAN must be exactly 10 characters");
+    } else {
+      setPanError("");
+    }
+  };
   const [assessmentYear, setAssessmentYear] = useState("");
 
   if (!userType) {
@@ -62,6 +74,11 @@ const Onboarding = () => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
+                if (!panRegex.test(pan)) {
+                  setPanError("Invalid PAN format (e.g. ABCDE1234F)");
+                  return;
+                }
                 navigate("/dashboard");
               }}
               className="space-y-4"
@@ -72,7 +89,18 @@ const Onboarding = () => {
               </div>
               <div className="space-y-2">
                 <Label>PAN Number</Label>
-                <Input placeholder="ABCDE1234F" value={pan} onChange={(e) => setPan(e.target.value.toUpperCase())} maxLength={10} required />
+                <Input
+                  placeholder="ABCDE1234F"
+                  value={pan}
+                  onChange={(e) => {
+                    const val = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+                    setPan(val);
+                    validatePan(val);
+                  }}
+                  maxLength={10}
+                  required
+                />
+                {panError && <p className="text-sm text-destructive">{panError}</p>}
               </div>
               <div className="space-y-2">
                 <Label>Assessment Year</Label>
@@ -83,6 +111,9 @@ const Onboarding = () => {
                   <SelectContent>
                     <SelectItem value="2025-26">AY 2025-26</SelectItem>
                     <SelectItem value="2024-25">AY 2024-25</SelectItem>
+                    <SelectItem value="2023-24">AY 2024-25</SelectItem>
+                    <SelectItem value="2022-23">AY 2024-25</SelectItem>
+                    <SelectItem value="2021-22">AY 2024-25</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
